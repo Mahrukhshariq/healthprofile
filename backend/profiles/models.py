@@ -35,8 +35,6 @@ class HealthProfile(models.Model):
         indexes = [
             # admin list: filter by status, newest first
             models.Index(fields=["status", "-created_at"], name="idx_profile_status_created"),
-            # admin search by name
-            models.Index(fields=["full_name"], name="idx_profile_full_name"),
         ]
 
     def __str__(self):
