@@ -1,0 +1,23 @@
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, sans-serif; background: #f5f7fb; color: #1b2438; }
+.nav { display: flex; gap: 24px; align-items: center; padding: 14px 32px; background: #0b1226; color: #fff; }
+.nav nav { display: flex; gap: 16px; }
+.nav a { color: #9fd9ff; text-decoration: none; }
+.container { max-width: 880px; margin: 32px auto; padding: 0 16px; }
+.card { background: #fff; border: 1px solid #dde3f0; border-radius: 12px; padding: 24px; }
+label { display: block; margin: 12px 0 4px; font-weight: 600; font-size: 14px; }
+input, select, textarea { width: 100%; padding: 9px 10px; border: 1px solid #b9c3d9; border-radius: 8px; font: inherit; }
+button { padding: 9px 16px; border: 0; border-radius: 8px; background: #3555d8; color: #fff; font: inherit; cursor: pointer; }
+button.secondary { background: #e4e9f5; color: #1b2438; }
+button.danger { background: #c0392b; }
+button:disabled { opacity: 0.5; cursor: default; }
+.row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; margin-top: 16px; }
+.error { color: #b3261e; background: #fdecea; padding: 8px 12px; border-radius: 8px; margin-top: 12px; }
+.success { color: #1e6b3a; background: #e6f4ea; padding: 8px 12px; border-radius: 8px; margin-top: 12px; }
+table { width: 100%; border-collapse: collapse; margin-top: 16px; background: #fff; }
+th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid #e3e8f4; font-size: 14px; }
+.badge { padding: 2px 8px; border-radius: 999px; font-size: 12px; background: #e6f4ea; }
+.badge.inactive { background: #f3e0de; }
+dl { display: grid; grid-template-columns: 200px 1fr; gap: 6px 12px; }
+dt { font-weight: 600; }
+dd { margin: 0; }
