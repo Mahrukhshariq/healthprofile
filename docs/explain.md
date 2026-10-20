@@ -15,9 +15,7 @@ SEARCH profiles_healthprofile USING INDEX idx_profile_status_created (status=?)
 - Composite index `(status, -created_at)` serves the filter and the ordering,
   so SQLite does not need a temporary B-tree sort.
 - Without the index the plan would be a full table `SCAN` plus a sort.
-- With only a few synthetic rows SQLite can still pick the index here because
-  the index fully covers the filter and order; on PostgreSQL use
-  `EXPLAIN ANALYZE` to compare timings at larger sizes.
+- The composite index lets SQLite find the status='active' rows already ordered by created_at DESC, so no temporary B-tree sort is needed. On a few rows the planner may choose a scan either way, so the plan is the evidence here and timings are not.
 
 ## Why each index exists
 | Index | Query it serves |

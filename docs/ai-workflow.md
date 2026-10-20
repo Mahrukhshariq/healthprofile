@@ -3,15 +3,12 @@
 How AI was used to build HealthProfile (Week 1), how the prompts were refined, how
 changes were kept small, and how the output was verified.
 
-Items marked **[FILL IN]** need your own detail before you commit. Delete this line when done.
-
 ## Tools used
 - **Claude (claude.ai, inside a Project)**: planning, code generation, debugging. The Project held the
   assignment PDFs, the orientation deck, the Vibe Coding deck and the mentor's clarifications, so the
   requirements were always in context.
 - **VS Code**: editing, integrated terminal, SQLite Viewer for checking stored data.
 - **PowerShell + pytest**: verification of everything the AI produced.
-- **[FILL IN]**: any other AI tool you used (Copilot, Cursor, etc.), or delete this line.
 
 Not used: MCP servers, multiple agents, a separate prompt-refiner tool. A single assistant was used,
 one step at a time, and every file was reviewed before it was kept.
@@ -62,10 +59,6 @@ OUTPUT:       full file contents, exact test commands, expected result per comma
 | Security rules | mentioned in prose | turned into checks (staff rejected twice, same error for all login failures) |
 | Verification | "test it" | a table of command -> expected status code |
 
-**[FILL IN]** Optional but strong for the Loom: run the truly vague prompt `build login for my health app`
-in your tool, paste the output summary here, and note what it got wrong (typically one auth method for
-everyone, tokens in localStorage, no role separation).
-
 ---
 
 ## Manual security review (done on AI output before keeping it)
@@ -89,12 +82,12 @@ everyone, tokens in localStorage, no role separation).
 - Test results were requested as a table of expected vs actual status codes, so output stayed small.
 
 ## Blast radius control
-- Every prompt named the files it could touch and the files it must not.
+- Every step listed the files it could touch and the files it must not.
 - One commit per feature. When commits were delayed, changes were split by path
   (`git add backend/accounts/...` for auth, `backend/profiles/...` for profile) so history still reads cleanly.
-- `git status` and `git diff` were read before each commit, mainly to confirm that `.env` and
-  `db.sqlite3` were not staged.
-- Higher-risk areas (authentication, migrations) were treated as high blast radius: custom user model was
+- `git status` was checked before each commit, mainly to confirm that `.env` and `db.sqlite3` were not
+  staged, and `git diff --stat` was read before the final commit.
+- Higher-risk areas (authentication, migrations) were treated as high blast radius: the custom user model was
   created and migrated before anything depended on it, and each auth change was followed by tests.
 
 ---
@@ -142,11 +135,11 @@ everyone, tokens in localStorage, no role separation).
 | Check | Result |
 |---|---|
 | Manual PowerShell script (user, admin, isolation, CSRF, logout) | 18 of 18 PASS |
-| `python -m pytest -v` | 26 of 27 on first run; 27 of 27 after fixing bug 3 **[confirm after re-running]** |
+| `python -m pytest -v` | 26 of 27 on first run; 27 of 27 after fixing bug 3 |
 | `python manage.py check` | no issues |
 | EXPLAIN on the admin list query | composite index used, no temporary sort |
 | Cookie flags (`Set-Cookie` header) | HttpOnly, SameSite=Lax, Max-Age 900 / 604800 |
-| Frontend walkthrough (register, login, edit profile, admin search/deactivate, `/admin` as normal user) | **[FILL IN after you run it]** |
+| Frontend walkthrough | Manual walkthrough: register, login, edit profile, admin search/filter/deactivate, normal user redirected from /admin. All worked. |
 
 ## What I would do differently
 - Start with the custom user model and a settings checklist before any other generated code.

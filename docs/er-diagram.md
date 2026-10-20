@@ -1,7 +1,7 @@
 ```mermaid
 erDiagram
     USER ||--o| HEALTH_PROFILE : "has one (CASCADE)"
-    USER ||--o{ SESSION : "admin session (framework-managed)"
+      USER ||--o{ SESSION : "logical link via session_data (no FK)"
     USER {
         int id PK
         string email UK "unique on lower(email)"
